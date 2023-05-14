@@ -1,22 +1,30 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from '@storybook/react';
 
-import OneTimePassword from "./one-time-password"
+import OneTimePassword from './one-time-password';
+
+type Story = StoryObj<typeof meta>;
 
 const meta = {
-	title: "OTP/Simple input",
-	component: OneTimePassword,
-	tags: ["autodocs"],
-	argTypes: {
-		numberOfFields: { control: "number" },
-	},
-} satisfies Meta<typeof OneTimePassword>
+  title: 'One Time Password',
+  component: OneTimePassword,
+  tags: ['autodocs'],
+  argTypes: {
+    numberOfFields: {
+      control: 'number',
+      description: 'Number of text inputs to build out OTP.',
+    },
+    setValue: {
+      control: 'none',
+      description: "React's set state action.",
+    },
+  },
+} satisfies Meta<typeof OneTimePassword>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const OTPInput: Story = {
-	args: {
-		numberOfFields: 6,
-	},
-}
+export const SimpleOTPInput: Story = {
+  args: {
+    numberOfFields: 6,
+    setValue: () => null,
+  },
+};
