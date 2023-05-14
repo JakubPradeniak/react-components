@@ -1,7 +1,15 @@
-import { CSSProperties, FocusEvent, KeyboardEvent, useState } from 'react';
+import {
+  CSSProperties,
+  FocusEvent,
+  KeyboardEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 
 type OneTimePasswordProps = {
   numberOfFields: number;
+  setValue: React.Dispatch<SetStateAction<string>>;
 };
 
 const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>): void => {
@@ -40,10 +48,17 @@ const inputStyle: CSSProperties = {
   fontSize: '1.5rem',
 };
 
-const OneTimePassword = ({ numberOfFields }: OneTimePasswordProps) => {
+const OneTimePassword = ({
+  numberOfFields,
+  setValue,
+}: OneTimePasswordProps) => {
   const [otpValue, setOtpValue] = useState<string[]>(() =>
     new Array(numberOfFields).fill('')
   );
+
+  useEffect(() => {
+    setValue(otpValue.join(''));
+  }, [otpValue, setValue]);
 
   return (
     <div style={{ display: 'flex', gap: '1rem' }}>
