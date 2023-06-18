@@ -65,6 +65,7 @@ const OneTimePassword = ({
       {otpValue.map((value, index) => (
         <input
           key={index}
+          data-cy="otp-field"
           style={inputStyle}
           type="text"
           inputMode="numeric"
